@@ -15,7 +15,9 @@ public class StudentServiceImpl implements StudentService {
 
       private final PasswordEncoder passwordEncoder;
       private final StudentRepository studentRepository;
-    @Override
+
+
+      @Override
     public ResponseEntity<?> registerStudent(StudentRegistrationRequest request) {
 
         // Validate password match
