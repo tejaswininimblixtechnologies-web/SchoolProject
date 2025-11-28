@@ -52,10 +52,10 @@ public class StudentServiceImpl implements StudentService {
         student.setFullName(request.getFullName());
         student.setEmail(request.getEmail());
         student.setPassword(encodedPassword);
+        student.setSchoolId(request.getSchoolId());
 
         studentRepository.save(student);
 
-        // Return success message
         return ResponseEntity.ok("Registration Successful");
     }
 	@Override
@@ -88,5 +88,10 @@ public class StudentServiceImpl implements StudentService {
         }
         return ResponseEntity.badRequest().body("Email Id or Password is incorrect!");
 	}
+
+    @Override
+    public void getStudentListBySchoolId(Integer schoolId) {
+
+    }
 
 }

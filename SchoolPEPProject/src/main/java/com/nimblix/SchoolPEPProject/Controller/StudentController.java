@@ -34,9 +34,10 @@ public class StudentController {
     fullname,emailId and password.
      */
     @PostMapping("/register")
-    public ResponseEntity<?> studentRegistration(@RequestBody StudentRegistrationRequest studentRegistrationRequest){
-         studentService.registerStudent(studentRegistrationRequest);
-         return  ResponseEntity.status(HttpStatus.CREATED).body("Student Registration Successful");
+    public ResponseEntity<?> studentRegistration(@RequestBody StudentRegistrationRequest request){
+        System.out.println("Controller Hit!");
+        studentService.registerStudent(request);
+        return ResponseEntity.status(HttpStatus.OK).body("Student Registration Successful");
     }
     
     @GetMapping("/login")
@@ -48,5 +49,12 @@ public class StudentController {
     public ResponseEntity<?> studentLogin(@RequestBody StudentLoginRequest studentLoginRequest){
     	return studentService.loginStudent(studentLoginRequest);
     }
+
+    @GetMapping("/studentlist")
+    public ResponseEntity<?> getStudentListBySchoolId(@RequestParam Integer schoolId){
+        studentService.getStudentListBySchoolId(schoolId);
+        return null;
+    }
+
 
 }

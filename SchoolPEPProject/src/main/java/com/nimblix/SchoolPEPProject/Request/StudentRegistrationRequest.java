@@ -12,4 +12,6 @@ public class StudentRegistrationRequest {
     private String email;
     private String password;
     private String reEnterPassword;
+    private Integer schoolId;
+
 }

@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 public interface StudentService {
     ResponseEntity<?> registerStudent(StudentRegistrationRequest studentRegistrationRequest);
 
-<<<<<<< Updated upstream
     ResponseEntity<?> loginStudent(StudentLoginRequest studentLoginRequest);
-=======
-	ResponseEntity<?> loginStudent(StudentLoginRequest studentLoginRequest);
->>>>>>> Stashed changes
 
+    void getStudentListBySchoolId(Integer schoolId);
 }
