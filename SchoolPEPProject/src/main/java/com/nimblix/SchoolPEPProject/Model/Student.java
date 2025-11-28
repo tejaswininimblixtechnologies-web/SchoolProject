@@ -23,4 +23,7 @@ public class Student {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "schoolId")
+    private Integer schoolId;
+
 }
