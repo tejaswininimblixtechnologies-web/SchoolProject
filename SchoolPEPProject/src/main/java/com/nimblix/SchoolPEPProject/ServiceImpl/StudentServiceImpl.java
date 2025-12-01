@@ -1,7 +1,6 @@
 package com.nimblix.SchoolPEPProject.ServiceImpl;
 import com.nimblix.SchoolPEPProject.Model.Student;
 import com.nimblix.SchoolPEPProject.Repository.StudentRepository;
-import com.nimblix.SchoolPEPProject.Request.StudentLoginRequest;
 import com.nimblix.SchoolPEPProject.Request.StudentRegistrationRequest;
 import com.nimblix.SchoolPEPProject.Service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +13,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
-      private final PasswordEncoder passwordEncoder;
-      private final StudentRepository studentRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final StudentRepository studentRepository;
 
     public ResponseEntity<?> registerStudent(StudentRegistrationRequest request) {
 
@@ -45,4 +44,44 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findById(studentId).orElse(null);
     }
 
+    @Override
+    public void updateStudentDetails(Integer studentId, StudentRegistrationRequest request) {
+
+        Student existingStudent = studentRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Student not found with ID: " + studentId));
+
+        if (request.getFullName() != null) {
+            existingStudent.setFullName(request.getFullName());
+        }
+
+        if (request.getEmail() != null) {
+            existingStudent.setEmail(request.getEmail());
+        }
+
+        if (request.getPassword() != null && !request.getPassword().isEmpty()) {
+
+            if (!request.getPassword().equals(request.getReEnterPassword())) {
+                throw new RuntimeException("Password and Re-Enter Password do not match!");
+            }
+
+            String encodedPassword = passwordEncoder.encode(request.getPassword());
+            existingStudent.setPassword(encodedPassword);
+        }
+
+        if (request.getSchoolId() != null) {
+            existingStudent.setSchoolId(request.getSchoolId());
+        }
+
+        studentRepository.save(existingStudent);
+    }
+
+
+    @Override
+    public void deleteStudent(Integer studentId) {
+
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Student not found with ID: " + studentId));
+
+        studentRepository.delete(student);
+    }
 }

@@ -10,4 +10,10 @@ public interface StudentService {
     ResponseEntity<?> registerStudent(StudentRegistrationRequest studentRegistrationRequest);
 
     Student getStudentListByStudentId(Integer studentId);
+
+    void deleteStudent(Integer studentId);
+
+    void updateStudentDetails(Integer studentId, StudentRegistrationRequest request);
+
+//    void updateStudentDetails(Integer studentId, StudentRegistrationRequest request);
 }
