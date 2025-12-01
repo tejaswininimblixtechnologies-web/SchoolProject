@@ -1,5 +1,6 @@
 package com.nimblix.SchoolPEPProject.Model;
 
+import com.nimblix.SchoolPEPProject.Util.SchoolUtil;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import lombok.*;
 @Builder
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "full_name")
@@ -25,5 +26,24 @@ public class Student {
 
     @Column(name = "schoolId")
     private Integer schoolId;
+
+    @Column(name = "created_time")
+    private String createdTime;
+
+    @Column(name = "updated_time")
+    private String updatedTime;
+
+
+    @PrePersist
+    protected void onCreate(){
+        createdTime= SchoolUtil.changeCurrentTimeToLocalDateFromGmtToISTInString();
+        updatedTime= SchoolUtil.changeCurrentTimeToLocalDateFromGmtToISTInString();
+
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedTime= SchoolUtil.changeCurrentTimeToLocalDateFromGmtToISTInString();
+    }
 
 }
