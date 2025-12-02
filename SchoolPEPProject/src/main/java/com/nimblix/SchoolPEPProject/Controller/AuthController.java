@@ -44,11 +44,8 @@ public class AuthController {
                         .body(Collections.singletonMap("message", "User not found or inactive."));
             }
 
-            String role = user.getRole().getRoleName().toUpperCase(); // STUDENT / ADMIN / TEACHER / PARENT
+            String role = user.getRole().getRoleName().toUpperCase();
 
-            // -------------------------------------------------------
-            // 1️⃣ STUDENT LOGIN (PASSWORD REQUIRED)
-            // -------------------------------------------------------
             if (role.equals(SchoolConstants.STUDENT)) {
 
                 if (request.getPassword() == null || request.getPassword().trim().isEmpty()) {
@@ -65,9 +62,6 @@ public class AuthController {
                 );
             }
 
-            // -------------------------------------------------------
-            // 2️⃣ TEACHER / PARENT / ADMIN LOGIN (NO PASSWORD REQUIRED)
-            // -------------------------------------------------------
             else {
                 // No password check — allow login by email only
                 System.out.println(role + " logged in using email only");

@@ -1,4 +1,5 @@
 package com.nimblix.SchoolPEPProject.ServiceImpl;
+import com.nimblix.SchoolPEPProject.Constants.SchoolConstants;
 import com.nimblix.SchoolPEPProject.Model.Student;
 import com.nimblix.SchoolPEPProject.Repository.StudentRepository;
 import com.nimblix.SchoolPEPProject.Request.StudentRegistrationRequest;
@@ -32,6 +33,7 @@ public class StudentServiceImpl implements StudentService {
         student.setEmail(request.getEmail());
         student.setPassword(encodedPassword);
         student.setSchoolId(request.getSchoolId());
+        student.setStatus(SchoolConstants.ACTIVE);
 
         studentRepository.save(student);
 

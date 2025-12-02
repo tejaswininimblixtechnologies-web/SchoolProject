@@ -12,7 +12,7 @@ import lombok.*;
 @Builder
 public class Student {
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "full_name")
@@ -26,6 +26,9 @@ public class Student {
 
     @Column(name = "schoolId")
     private Integer schoolId;
+
+    @Column(name = "status")
+    private String status;
 
     @Column(name = "created_time")
     private String createdTime;
@@ -44,6 +47,8 @@ public class Student {
     @PreUpdate
     protected void onUpdate(){
         this.updatedTime= SchoolUtil.changeCurrentTimeToLocalDateFromGmtToISTInString();
+
+
     }
 
 }
