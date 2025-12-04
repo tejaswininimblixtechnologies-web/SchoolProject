@@ -1,5 +1,6 @@
 package com.nimblix.SchoolPEPProject.Model;
 
+import com.nimblix.SchoolPEPProject.Util.SchoolUtil;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,5 +28,26 @@ public class School {
 
     @Column(name = "school_email")
     private String schoolEmail;
+
+    @Column(name = "created_time")
+    private String createdTime;
+
+    @Column(name = "updated_time")
+    private String updatedTime;
+
+
+    @PrePersist
+    protected void onCreate(){
+        createdTime= SchoolUtil.changeCurrentTimeToLocalDateFromGmtToISTInString();
+        updatedTime= SchoolUtil.changeCurrentTimeToLocalDateFromGmtToISTInString();
+
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedTime= SchoolUtil.changeCurrentTimeToLocalDateFromGmtToISTInString();
+
+
+    }
 
 }

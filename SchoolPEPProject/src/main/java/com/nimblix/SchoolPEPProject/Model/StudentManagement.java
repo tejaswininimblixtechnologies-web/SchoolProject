@@ -1,20 +1,19 @@
 package com.nimblix.SchoolPEPProject.Model;
 
-
 import com.nimblix.SchoolPEPProject.Util.SchoolUtil;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-
-
 @Entity
-@Table(name = "attendance_record")
+@Table(name = "student_management")
 @Getter
 @Setter
-@NoArgsConstructor
-public class Attendance {
+@RequiredArgsConstructor
+public class StudentManagement {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,11 +21,8 @@ public class Attendance {
     @Column(name = "student_id")
     private Long studentId;
 
-    @Column(name = "attendance_date")
-    private String attendanceDate;
-
-    @Column(name = "attendance_status")
-    private String attendanceStatus;
+    @Column(name = "admin_id")
+    private Long adminId;
 
     @Column(name = "created_time")
     private String createdTime;

@@ -21,6 +21,12 @@ public class Student {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "class_id")
+    private Long classId;
+
+    @Column(name = "section")
+    private String section;
+
     @Column(name = "password")
     private String password;
 
